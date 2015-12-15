@@ -1,28 +1,23 @@
-
-use std::io::MemReader;
+use std::io::BufReader;
 use std::option::Option;
 
 pub struct PrettyHex {
     byte_no : u64
 }
 
-
+///Implementation of PrettyHex
 impl PrettyHex {
-
+    
+    ///Construct a new PrettyHex and set current byte cursor to 0(zero)
     pub fn new() -> PrettyHex {
         PrettyHex {byte_no : 0}
     }
 
-    /*pub fn reset(&mut self) {
-        self.byte_no = 0;
-    }*/
-
-    pub fn display(&mut self, reader: &mut MemReader, end: Option<u64>) {
+    pub fn display(&mut self, reader: &mut BufReader, end: Option<u64>) {
         let endloc = end.unwrap_or(0u64);
-        while ! reader.eof() {
-            if end != None && self.byte_no == endloc {
-                break;
-            }
+        if end != None && self.byte_no == endloc {
+            println!("\nTotal of {} bytes", self.byte_no);
+        } else {
             match reader.read_u8() {
                 Err(e) => panic!("Memory read error: {}", e),
                 Ok(i)  => {
@@ -45,7 +40,6 @@ impl PrettyHex {
         }
         println!("\nTotal of {} bytes", self.byte_no);
     }
-
 }
 
 // TODO: Print line number for first row

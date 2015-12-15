@@ -1,14 +1,22 @@
-use std::io::{MemReader, IoResult};
+//A 'trait' is a collection of methods declared/defined for an unknown type: Self. Traits can be implemented for any data type
 
-pub enum Endianness { BigEndian, LittleEndian, Unknown }
+use std::io::{BufReader, Result};
 
+pub enum Endianness { 
+                BigEndian, 
+                LittleEndian, 
+                Unknown,
+}
+
+///Define a trait to display parts of a captured packet
 pub trait Descriptor {
-    fn init(&mut self, reader: &mut MemReader, order: Endianness) -> IoResult<()>;
+    fn init(&mut self, reader: &mut BufReader, order: Endianness) -> Result<()>;
     fn display_details(&self);
-    fn display_raw_hdr(&self, reader: &mut MemReader);
-    fn display_raw_pl(&self, reader: &mut MemReader);
+    ///
+    fn display_raw_hdr(&self, reader: &mut BufReader);
+    fn display_raw_pl(&self, reader: &mut BufReader);
 
-    fn display(&self, reader: &mut MemReader) {
+    fn display(&self, reader: &mut BufReader) {
         println!("++++ START OF DATA DETAILS ++++");
         self.display_details();
         println!("");

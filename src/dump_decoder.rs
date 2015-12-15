@@ -1,4 +1,4 @@
-use std::io::{MemReader, SeekSet, IoResult, IoError};
+use std::io::{BufReader, SeekSet, IoResult, IoError};
 use std::io::{InvalidInput, MismatchedFileTypeForOperation};
 
 use pretty_hex::PrettyHex;
@@ -15,14 +15,14 @@ pub struct DumpDecoder {
     network       : u32,  /* data link type */
 
     // Dump decoder info and states
-    dump          : MemReader,
+    dump          : BufReader,
     endian        : Endianness,
     records       : Vec<RecDescriptor>
 }
 
 impl DumpDecoder {
-
-    pub fn new(reader: MemReader) -> DumpDecoder {
+    ///Construct a new `DumpDecoder` using buffer reader
+    pub fn new(reader: BufReader) -> DumpDecoder {
         DumpDecoder {
             version_major : 0,
             version_minor : 0,
@@ -35,7 +35,8 @@ impl DumpDecoder {
             records       : vec![]
         }
     }
-
+    
+    ///Actual decode routine to understand the pcap file
     pub fn decode(&mut self) -> IoResult<()>{
         match self.dump.seek(0, SeekSet) {
             Ok(()) => (),

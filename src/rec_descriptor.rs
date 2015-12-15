@@ -1,7 +1,8 @@
 use std::io::{MemReader, SeekCur, SeekSet, IoResult, IoError, InvalidInput};
 use std::io::BufReader;
 use std::option::Option;
-use prototype::{Descriptor, Endianness, LittleEndian, BigEndian, Unknown};
+use prototype::Descriptor;
+use prototype::Endianness;
 
 use pretty_hex::PrettyHex;
 
