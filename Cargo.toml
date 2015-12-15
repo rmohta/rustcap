@@ -1,0 +1,7 @@
+[package]
+name = "rustcap"
+version = "0.1.0"
+authors = ["Rohit Mohta <rmohta.coder@gmail.com>"]
+description = "Experimental Rust language project for parsing pcap files. Forked from gokuldas/study-rustycap."
+
+[dependencies]
