@@ -1,7 +1,6 @@
-**Note: Forked from https://github.com/gokuldas/study-rustycap**
-
 Study-RustyCap
 ==============
+** Note: Forked from https://github.com/gokuldas/study-rustycap **
 
 An experimental project to implement pcap processing in Rust language.
 Implements processing of file structure described by wireshark wiki: http://wiki.wireshark.org/Development/LibpcapFileFormat
